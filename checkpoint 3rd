@@ -1,0 +1,52 @@
+import operator
+
+
+def addition(x, y):
+    return x + y
+
+
+def multiplication(x, y):
+    return x * y
+
+
+def division(x, y):
+    if y != 0:
+        return x / y
+    else:
+        return "Erreur : Division par zéro !"
+
+
+def soustraction(x, y):
+    return x - y
+
+
+operations = {
+    '+': addition,
+    '*': multiplication,
+    '/': division,
+    '-': soustraction
+}
+
+
+def calculator():
+    num1 = float(input('Saisir le premier nombre : '))
+
+    should_continue = True
+    while should_continue:
+        print("Opérations disponibles : ", list(operations.keys()))
+        operator = input("Choisissez une opération : ")
+
+        if operator not in operations:
+            print("Opération invalide, veuillez réessayer.")
+            continue
+
+        num2 = float(input("Entrez le deuxième nombre : "))
+        calculation_function = operations[operator]
+        answer = calculation_function(num1, num2)
+        print(f"{num1} {operator} {num2} = {answer}")
+
+        continue_calc = input("Voulez-vous continuer avec ce résultat ? (oui/non) : ").strip().lower()
+        if continue_calc == 'oui':
+            num1 = answer
+        else:
+            should_continue = False
